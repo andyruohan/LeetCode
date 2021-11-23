@@ -26,17 +26,15 @@ class Solution {
                 l1 = l1.next;
                 l2 = l2.next;
             }
-            curPoint.val = sum % 10;
             carry = sum / 10;
-
-            if (l1 != null || l2 != null) { //to get nextPoint
-                ListNode newPoint = new ListNode();
-                curPoint.next = newPoint;
-                curPoint = newPoint;
-            } else if (carry == 1) { //to get right answer when l1 == null and l2 == null with carry == 1
-                curPoint.next = new ListNode(1);
-            }
+            curPoint.next = new ListNode(sum % 10);
+            curPoint = curPoint.next;
         }
-        return result;
+
+        if (carry == 1) { //to get right answer when l1 == null and l2 == null with carry == 1
+            curPoint.next = new ListNode(1);
+        }
+
+        return result.next;
     }
 }
