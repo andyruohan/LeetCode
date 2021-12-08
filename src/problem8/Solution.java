@@ -1,86 +1,49 @@
 package problem8;
 
+/**
+ * Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer (similar to C/C++'s atoi function).
+ *
+ * The algorithm for myAtoi(string s) is as follows:
+ *
+ * 1. Read in and ignore any leading whitespace.
+ * 2. Check if the next character (if not already at the end of the string) is '-' or '+'. Read this character in if it is either. This determines if the final result is negative or positive respectively. Assume the result is positive if neither is present.
+ * 3. Read in next the characters until the next non-digit character or the end of the input is reached. The rest of the string is ignored.
+ * 4. Convert these digits into an integer (i.e. "123" -> 123, "0032" -> 32). If no digits were read, then the integer is 0. Change the sign as necessary (from step 2).
+ * 5. If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then clamp the integer so that it remains in the range. Specifically, integers less than -231 should be clamped to -231, and integers greater than 231 - 1 should be clamped to 231 - 1.
+ * 6. Return the integer as the final result.
+ */
 public class Solution {
-    public static int myAtoi(String s) {
-        int length = s.length();
-        if (length == 0) {
-            return 0;
+    public static int myAtoi(String str) {
+        int index = 0, sign = 1, total = 0;
+        //1. Empty string
+        if(str.length() == 0) return 0;
+
+        //2. Remove Spaces
+        while(index < str.length()  && str.charAt(index) == ' ')
+            index ++;
+
+        //3. Handle signs
+        if(index != str.length() && (str.charAt(index) == '+' || str.charAt(index) == '-')){
+            sign = str.charAt(index) == '+' ? 1 : -1;
+            index ++;
         }
 
-        Integer left = null;
-        Integer right = null;
-        Boolean alreadyHasDigt = false;
-        Character signFlag = null;
-        for (int i = 0; i < length; i++) {
-            if (' ' != s.charAt(i)) {
-                if ((s.charAt(i) == '-' || s.charAt(i) == '+') && i != length - 1 && left == null) {
-                    signFlag = s.charAt(i);
-                    continue;
-                }
-                if ('0' <= s.charAt(i) && s.charAt(i) <= '9') {
-                    //处理"00000-42a1234"这样的前排为0的字符串
-                    if (alreadyHasDigt) {
-                        return 0;
-                    }
+        //4. Convert number and avoid overflow
+        while(index < str.length()){
+            int digit = str.charAt(index) - '0';
+            if(digit < 0 || digit > 9) break;
 
-                    //处理"  0000000000012345678"这样的前排为0的字符串
-                    if (s.charAt(i) == '0' && left == null) {
-                        continue;
-                    } else if (s.charAt(i) == '0' && signFlag != null) {
-                        continue;
-                    }
-                    if (left == null) {
-                        left = i;
-                    } else {
-                        right = i;
-                    }
-                } else {
-                    if (left == null) {
-                        return 0;
-                    } else if (left != null && right != null) {
-                        alreadyHasDigt = true;
-                    } else {
-                        return 0;
-                    }
-                }
-                if (i == length -1) {
-                    right = i;
-                }
-            } else {
-                if (left != null) {
-                    break;
-                }
-            }
-        }
+            //check if total will be overflow after 10 times and add digit
+            if(Integer.MAX_VALUE/10 < total || Integer.MAX_VALUE/10 == total && Integer.MAX_VALUE %10 < digit)
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
 
-
-        if (left != null && length == 1) {
-            return Integer.valueOf(s);
-        } else if (left == null) {
-            return 0;
+            total = 10 * total + digit;
+            index ++;
         }
-        String str = s.substring(left, right + 1);
-        if (signFlag != null) {
-            str = signFlag + str;
-        }
-
-        //处理"20000000000000000000"这样的超长字符串
-        if (str.length() > 15) {
-            str = str.substring(0, 16);
-        }
-
-        Long num = Long.valueOf(str);
-        if (Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE) {
-            return Integer.valueOf(str);
-        } else if (num < Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        } else if (num > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        }
-        return 0;
+        return total * sign;
     }
 
     public static void main(String[] args) {
-        System.out.println(myAtoi("-91283472332"));
+        System.out.println(myAtoi("3.14159"));
     }
 }
