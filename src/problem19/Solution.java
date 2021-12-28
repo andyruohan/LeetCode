@@ -9,22 +9,38 @@ public class Solution {
             return null;
         }
 
-        TwoPointersListNode curPointer1 = new TwoPointersListNode(head.val);
-        curPointer1.next = head.next;
-        while (head != null) {
-            if (head.next != null && head.next.next != null) {
-                curPointer1 = new TwoPointersListNode(head.val);
-                curPointer1.next = new ListNode(head.next.next.val);
-            } else if (head.next != null && head.next.next == null) {
-                curPointer1 = new TwoPointersListNode(head.val);
+        ListNode firstPointer = head;
+        for (int i = 0; i < n - 1; i++) {
+            if (firstPointer.next != null) {
+                firstPointer = firstPointer.next;
+            } else {
+                return null;
             }
-            curPointer1.pre = new ListNode(head.val);
-            head = head.next;
         }
 
-        TwoPointersListNode curPointer2 = new TwoPointersListNode(0);
-        int index = 1;
-        while (curPointer1 != null) {
+        ListNode secondPointer = head;
+        ListNode curPointer = new ListNode(head.val);
+        ListNode result = curPointer;
+        while (firstPointer.next != null) {
+            firstPointer = firstPointer.next;
+            secondPointer = secondPointer.next;
+            curPointer.next = new ListNode(secondPointer.val);
+            curPointer = curPointer.next;
         }
+
+        if (n != 1) {
+            if (secondPointer.next != null && secondPointer.next.next != null) {
+                secondPointer = secondPointer.next.next;
+                curPointer.next = new ListNode(secondPointer.val);
+            }
+
+            while (secondPointer.next != null) {
+                secondPointer = secondPointer.next;
+                curPointer.next = new ListNode(secondPointer.val);
+                curPointer = curPointer.next;
+            }
+        }
+
+        return result;
     }
 }
