@@ -6,35 +6,22 @@ import java.util.List;
 public class Solution {
     public static List<String> generateParenthesis(int n) {
         List<String> result = new ArrayList<>();
-        result.add("()");
-        if (n == 1) {
-            return result;
-        }
-
-        for (int i = 1; i < n; i++) {
-            result = generateParenthesisCore(result);
+        if (n == 0) {
+            result.add(""); 
+        } else {
+            for (int i = 0; i < n; i++) {
+                for (String left : generateParenthesis(i)) {
+                    for (String right : generateParenthesis(n - 1 - i)) {
+                        result.add("(" + left + ")" + right);
+                    }
+                }
+            }
         }
 
         return result;
     }
 
-    private static List<String> generateParenthesisCore(List<String> stringList) {
-        List<String> curParenthesis = new ArrayList<>();
-        for (String str : stringList) {
-            if (!curParenthesis.contains("()"+str)) {
-                curParenthesis.add("()"+str);
-            }
-            if (!curParenthesis.contains("("+str+")")) {
-                curParenthesis.add("("+str+")");
-            }
-            if (!curParenthesis.contains(str+"()")) {
-                curParenthesis.add(str+"()");
-            }
-        }
-        return curParenthesis;
-    }
-
     public static void main(String[] args) {
-        System.out.println(generateParenthesis(3));
+        System.out.println(generateParenthesis(4));
     }
 }
