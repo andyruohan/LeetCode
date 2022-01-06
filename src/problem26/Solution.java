@@ -1,13 +1,10 @@
 package problem26;
 
-import java.util.Arrays;
-
 public class Solution {
     public static int removeDuplicates(int[] nums) {
         if (nums == null) {
             return 0;
         }
-        Arrays.sort(nums);
 
         int slowI = 0;
         for (int i = 1; i < nums.length; i++) {
