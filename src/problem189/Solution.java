@@ -4,23 +4,27 @@ public class Solution {
     public static void rotate(int[] nums, int k) {
         int n = nums.length;
         k = k % n;
-        int offset = n - k, temp;
+        int count = gcd(n, k);
 
-        for (int i = 0; i < k; i++) {
-            temp = nums[i];
-            nums[i] = nums[i + offset];
-            nums[i + offset] = temp;
+        for (int i = 0; i < count; i++) {
+            int cur = i;
+            int curValue = nums[cur];
+            do {
+                int next = (cur + k) % n;
+                int nextValue = nums[next];
+                nums[next] = curValue;
+                curValue = nextValue;
+                cur = next;
+            } while (cur != i);
         }
+        System.out.println("123");
+    }
 
-        for (int i = k; i < n; i++) {
-            temp = nums[i];
-            nums[i] = nums[--n];
-            nums[n] = temp;
-        }
-        return;
+    public static int gcd(int x, int y) {
+        return y > 0 ? gcd(y, x % y) : x;
     }
 
     public static void main(String[] args) {
-        rotate(new int[] {1,2,3,4,5,6,7}, 3);
+        rotate(new int[]{1, 2, 3, 4, 5, 6, 7}, 3);
     }
 }
