@@ -1,4 +1,4 @@
-package problem19;
+package Algorithm_I.Day5.problem19;
 
 public class Solution {
     public static ListNode removeNthFromEnd(ListNode head, int n) {

@@ -1,4 +1,4 @@
-package problem19;
+package Algorithm_I.Day5.problem876;
 
 public class ListNode {
     int val;
@@ -7,4 +7,3 @@ public class ListNode {
     ListNode(int val) { this.val = val; }
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 }
-
