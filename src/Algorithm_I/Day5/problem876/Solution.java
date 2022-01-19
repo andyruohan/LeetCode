@@ -2,22 +2,14 @@ package Algorithm_I.Day5.problem876;
 
 public class Solution {
     public ListNode middleNode(ListNode head) {
-        ListNode result = new ListNode(0);
-        result.next = head;
+        ListNode fast = head;
+        ListNode slow = head;
 
-        int length = 0;
-        while (head != null) {
-            length++;
-            head = head.next;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
         }
 
-        int offset = length / 2;
-        int index = 0;
-        while (result.next != null && index < offset) {
-            result = result.next;
-            index++;
-        }
-
-        return result.next;
+        return slow;
     }
 }
