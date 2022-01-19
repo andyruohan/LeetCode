@@ -1,4 +1,4 @@
-package problem167;
+package Algorithm_I.Day3.problem167;
 
 import java.util.HashMap;
 

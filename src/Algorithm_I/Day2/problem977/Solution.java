@@ -1,4 +1,4 @@
-package problem977;
+package Algorithm_I.Day2.problem977;
 
 import java.util.Arrays;
 

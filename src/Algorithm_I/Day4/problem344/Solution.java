@@ -1,4 +1,4 @@
-package problem344;
+package Algorithm_I.Day4.problem344;
 
 public class Solution {
     public static void reverseString(char[] s) {

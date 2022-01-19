@@ -1,4 +1,4 @@
-package problem189;
+package Algorithm_I.Day2.problem189;
 
 public class Solution {
     public static void rotate(int[] nums, int k) {

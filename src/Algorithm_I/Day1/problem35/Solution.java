@@ -1,4 +1,4 @@
-package problem35;
+package Algorithm_I.Day1.problem35;
 
 public class Solution {
     public static int searchInsert(int[] nums, int target) {

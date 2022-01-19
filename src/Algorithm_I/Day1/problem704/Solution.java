@@ -1,4 +1,4 @@
-package problem704;
+package Algorithm_I.Day1.problem704;
 
 public class Solution {
     public static int search(int[] nums, int target) {

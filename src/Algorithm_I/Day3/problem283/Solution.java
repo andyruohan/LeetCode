@@ -1,4 +1,4 @@
-package problem283;
+package Algorithm_I.Day3.problem283;
 
 public class Solution {
     public static void moveZeroes(int[] nums) {

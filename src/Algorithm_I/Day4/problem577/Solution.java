@@ -1,4 +1,4 @@
-package problem577;
+package Algorithm_I.Day4.problem577;
 
 public class Solution {
     public static String reverseWords(String s) {

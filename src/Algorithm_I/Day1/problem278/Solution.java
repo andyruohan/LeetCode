@@ -1,4 +1,4 @@
-package problem278;
+package Algorithm_I.Day1.problem278;
 
 public class Solution {
     public static int firstBadVersion(int n) {
