@@ -1,4 +1,4 @@
-package problem3;
+package Algorithm_I.Day6.problem3;
 
 /**
  * 解题思路：

@@ -1,4 +1,4 @@
-package Algorithm_I.Day8;
+package Algorithm_I.Day8.problem617;
 
 public class Solution {
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {

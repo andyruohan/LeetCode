@@ -1,4 +1,4 @@
-package Algorithm_I.Day8;
+package Algorithm_I.Day8.problem617;
 
 public class TreeNode {
     int val;
