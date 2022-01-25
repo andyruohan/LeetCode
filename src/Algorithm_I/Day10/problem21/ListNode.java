@@ -1,4 +1,4 @@
-package problem21;
+package Algorithm_I.Day10.problem21;
 
 public class ListNode {
     int val;

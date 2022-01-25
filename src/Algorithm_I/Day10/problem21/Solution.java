@@ -1,4 +1,4 @@
-package problem21;
+package Algorithm_I.Day10.problem21;
 
 public class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
