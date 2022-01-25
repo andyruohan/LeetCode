@@ -8,20 +8,15 @@ public class Solution {
             return null;
         }
 
-        Stack<ListNode> stack = new Stack<>();
-        while (head != null) {
-            stack.push(head);
-            head = head.next;
+        ListNode preNode = null;
+        ListNode curNode = head;
+        while (curNode != null) {
+            ListNode nextNode = curNode.next;
+            curNode.next = preNode;
+            preNode = curNode;
+            curNode = nextNode;
         }
-
-        ListNode curNode = stack.pop();
-        ListNode result = new ListNode(0, curNode);
-        while (!stack.isEmpty()) {
-            curNode.next = stack.pop();
-            curNode = curNode.next;
-        }
-        curNode.next = null;
-        return result.next;
+        return preNode;
     }
 
     public static void main(String[] args) {
