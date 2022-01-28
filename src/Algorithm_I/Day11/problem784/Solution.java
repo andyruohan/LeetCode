@@ -5,25 +5,29 @@ import java.util.List;
 
 public class Solution {
     public static List<String> letterCasePermutation(String s) {
+        List<StringBuilder> copy = new ArrayList<>();
+        copy.add(new StringBuilder());
+
+        for (Character c : s.toCharArray()) {
+            int n = copy.size();
+            if (Character.isLetter(c)) {
+                for (int i = 0; i < n; i++) {
+                    copy.add(new StringBuilder(copy.get(i)));
+                    copy.get(i).append(Character.toLowerCase(c));
+                    copy.get(n + i).append(Character.toUpperCase(c));
+                }
+            } else {
+                for (int i = 0; i < n; i++) {
+                    copy.get(i).append(c);
+                }
+            }
+        }
+
         List<String> res = new ArrayList<>();
-        int length = s.length();
-        StringBuilder path = new StringBuilder();
-        dfs(s, length, 0, path, res);
+        for (StringBuilder sb : copy) {
+            res.add(sb.toString());
+        }
         return res;
-    }
-
-    private static void dfs(String s, int length, int depth, StringBuilder path, List<String> res) {
-        if (path.length() == length) {
-            res.add(path.toString());
-            return;
-        }
-
-        for (int i = depth; i < length; i++) {
-            char c = s.charAt(i);
-            path.append(c);
-            dfs(s, length, depth + 1, path, res);
-            path.deleteCharAt(path.length() - 1);
-        }
     }
 
     public static void main(String[] args) {
