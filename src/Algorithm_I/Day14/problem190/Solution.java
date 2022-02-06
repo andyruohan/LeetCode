@@ -1,13 +1,13 @@
 package Algorithm_I.Day14.problem190;
 
 public class Solution {
-    public static int reverseBits(int n) {
-        String str = Integer.toBinaryString(n);
-        str = new StringBuilder(str).reverse().toString();
-        return Integer.parseInt(str, 2);
-    }
+    public int reverseBits(int n) {
+        int reverseN = 0;
+        for (int i = 0; i < 32; i++) {
+            reverseN += (1 & (n >> i)) << (31 - i);
+        }
+        return reverseN;
 
-    public static void main(String[] args) {
-        System.out.println(reverseBits(964176192 ));
+        //return Integer.reverse(n); //JDK源码
     }
 }
