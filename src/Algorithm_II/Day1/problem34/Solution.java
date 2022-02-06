@@ -1,4 +1,4 @@
-package problem34;
+package Algorithm_II.Day1.problem34;
 
 public class Solution {
     public static int[] searchRange(int[] nums, int target) {
