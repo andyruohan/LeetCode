@@ -2,7 +2,7 @@ package Algorithm_II.Day7.problem572;
 
 public class Solution {
     public static boolean isSubtree(TreeNode root, TreeNode subRoot) {
-        if (dfs(root, subRoot)) {
+        if (isSame(root, subRoot)) {
             return true;
         } else {
             if (root.left != null && root.right != null) {
@@ -17,10 +17,10 @@ public class Solution {
         return false;
     }
 
-    public static boolean dfs(TreeNode root, TreeNode subRoot) {
+    public static boolean isSame(TreeNode root, TreeNode subRoot) {
         if (root != null && subRoot != null) {
             if (root.val == subRoot.val) {
-                return dfs(root.left, subRoot.left) && dfs(root.right, subRoot.right);
+                return isSame(root.left, subRoot.left) && isSame(root.right, subRoot.right);
             } else return false;
         } else return root == null && subRoot == null;
     }
