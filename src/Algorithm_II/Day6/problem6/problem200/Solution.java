@@ -24,13 +24,11 @@ public class Solution {
             return;
         }
 
-        if (grid[x][y] == '1') {
-            grid[x][y] = '0';
-            dfs(grid, x - 1, y);
-            dfs(grid, x + 1, y);
-            dfs(grid, x, y - 1);
-            dfs(grid, x, y + 1);
-        }
+        grid[x][y] = '0';
+        dfs(grid, x - 1, y);
+        dfs(grid, x + 1, y);
+        dfs(grid, x, y - 1);
+        dfs(grid, x, y + 1);
     }
 
     public static void main(String[] args) {

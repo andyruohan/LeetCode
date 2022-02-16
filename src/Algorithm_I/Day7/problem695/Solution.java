@@ -18,12 +18,8 @@ public class Solution {
         }
 
         int curMaxArea = 1;
-        if (grid[x][y] == 1) {
-            grid[x][y] = 0;
-            return dfs(grid, x - 1, y) + dfs(grid, x + 1, y) + dfs(grid, x, y - 1) + dfs(grid, x, y + 1) + curMaxArea;
-        }
-
-        return curMaxArea;
+        grid[x][y] = 0;
+        return dfs(grid, x - 1, y) + dfs(grid, x + 1, y) + dfs(grid, x, y - 1) + dfs(grid, x, y + 1) + curMaxArea;
     }
 
     public static void main(String[] args) {
