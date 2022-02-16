@@ -1,4 +1,4 @@
-package Algorithm_II.Day6.problem6.problem200;
+package Algorithm_II.Day6.problem200;
 
 public class Solution {
     public static int numIslands(char[][] grid) {
