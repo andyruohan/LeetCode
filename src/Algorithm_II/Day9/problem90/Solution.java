@@ -1,12 +1,13 @@
 package Algorithm_II.Day9.problem90;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
     private static int length;
     public static List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
         length = nums.length;
         List<List<Integer>> result = new ArrayList<>();
         result.add(new ArrayList<>() {});
@@ -23,7 +24,6 @@ public class Solution {
         for (int i = 0; i < curLength; i++) {
             List<Integer> curList = new ArrayList<>(lists.get(i));
             curList.add(nums[n]);
-            Collections.sort(curList);
             if (!lists.contains(curList)) {
                 lists.add(curList);
             }
