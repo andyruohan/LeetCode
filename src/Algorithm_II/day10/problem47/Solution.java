@@ -1,12 +1,10 @@
 package Algorithm_II.day10.problem47;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
         int length = nums.length;
         List<List<Integer>> result = new ArrayList<>();
         if (length == 0) {
@@ -21,20 +19,20 @@ public class Solution {
 
     public static void dfs(int[] nums, int length, int depth, Deque<Integer> path, boolean[] used, List<List<Integer>> result) {
         if (depth == length) {
-            if (result.toString().contains(path.toString())) {
-                result.add(new ArrayList<>(path));
-            }
+            result.add(new ArrayList<>(path));
             return;
         }
 
         for (int i = 0; i < length; i++) {
-            if (!used[i]) {
-                path.addLast(nums[i]);
-                used[i] = true;
-                dfs(nums, length, depth + 1, path, used, result);
-                path.removeLast();
-                used[i] = false;
+            if (used[i] || i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
+                continue;
             }
+
+            path.addLast(nums[i]);
+            used[i] = true;
+            dfs(nums, length, depth + 1, path, used, result);
+            path.removeLast();
+            used[i] = false;
         }
     }
 
