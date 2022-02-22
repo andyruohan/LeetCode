@@ -8,19 +8,22 @@ public class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
         length = candidates.length;
-        List<List<Integer>> result = new ArrayList<>();
+        Set<List<Integer>> set = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>(set);
         if (length == 0) {
             return result;
         }
         Deque<Integer> path = new ArrayDeque<>();
         boolean[] used = new boolean[length];
-        dfs(candidates, path, result, target, used);
-        return result;
+        dfs(candidates, path, set, target, used);
+        return new ArrayList<>(set);
     }
 
-    public void dfs(int[] candidates, Deque<Integer> path, List<List<Integer>> result, int target, boolean[] used) {
+    public void dfs(int[] candidates, Deque<Integer> path, Set<List<Integer>> result, int target, boolean[] used) {
         if (sum == target) {
-            result.add(new ArrayList<>(path));
+            List<Integer> pathList = new ArrayList<>(path);
+            Collections.sort(pathList);
+            result.add(pathList);
             return;
         } else if (sum > target) {
             return;
