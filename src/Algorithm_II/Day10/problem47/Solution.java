@@ -1,4 +1,4 @@
-package Algorithm_II.day10.problem47;
+package Algorithm_II.Day10.problem47;
 
 import java.util.*;
 

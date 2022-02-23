@@ -1,10 +1,11 @@
-package Algorithm_II.day10.problem39;
+package Algorithm_II.Day10.problem40;
 
 import java.util.*;
 
 public class Solution {
     private int length;
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    private int sum;
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
         length = candidates.length;
         Set<List<Integer>> set = new HashSet<>();
@@ -13,11 +14,12 @@ public class Solution {
             return result;
         }
         Deque<Integer> path = new ArrayDeque<>();
-        dfs(candidates, 0, path, set, target);
+        boolean[] used = new boolean[length];
+        dfs(candidates, path, set, target, used);
         return new ArrayList<>(set);
     }
 
-    public void dfs(int[] candidates, int sum, Deque<Integer> path, Set<List<Integer>> result, int target) {
+    public void dfs(int[] candidates, Deque<Integer> path, Set<List<Integer>> result, int target, boolean[] used) {
         if (sum == target) {
             List<Integer> pathList = new ArrayList<>(path);
             Collections.sort(pathList);
@@ -31,9 +33,16 @@ public class Solution {
             if (sum + candidates[i] > target) {
                 break;
             }
+
+            if (used[i] || i > 0 && candidates[i] == candidates[i - 1] && !used[i - 1]) {
+                continue;
+            }
+
             path.addLast(candidates[i]);
             sum += candidates[i];
-            dfs(candidates, sum, path, result, target);
+            used[i] = true;
+            dfs(candidates, path, result, target, used);
+            used[i] = false;
             sum -= candidates[i];
             path.removeLast();
         }
@@ -41,6 +50,6 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.combinationSum(new int[]{2, 3, 6, 7}, 7));
+        System.out.println(solution.combinationSum2(new int[]{10,1,2,7,6,1,5}, 8));
     }
 }
