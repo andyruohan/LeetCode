@@ -23,8 +23,6 @@ public class Solution {
             Collections.sort(pathList);
             result.add(pathList);
             return;
-        } else if (sum > target) {
-            return;
         }
 
         for (int i = 0; i < length; i++) {
