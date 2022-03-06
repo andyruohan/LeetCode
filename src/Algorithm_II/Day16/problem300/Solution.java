@@ -2,7 +2,7 @@ package Algorithm_II.Day16.problem300;
 
 public class Solution {
     public int lengthOfLIS(int[] nums) {
-        int length = nums.length, maxValue = 1;
+        int length = nums.length, maxLength = 1;
         int[] dp = new int[length + 1];
         dp[0] = 0; dp[1] = 1;
 
@@ -13,9 +13,9 @@ public class Solution {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
-            maxValue = Math.max(maxValue, dp[i]);
+            maxLength = Math.max(maxLength, dp[i]);
         }
-        return maxValue;
+        return maxLength;
     }
 
     public static void main(String[] args) {
