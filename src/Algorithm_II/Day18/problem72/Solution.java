@@ -1,4 +1,4 @@
-package Algorithm_II.problem18.problem72;
+package Algorithm_II.Day18.problem72;
 
 public class Solution {
     public int minDistance(String word1, String word2) {
