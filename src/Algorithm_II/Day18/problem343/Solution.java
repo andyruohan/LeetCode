@@ -2,7 +2,6 @@ package Algorithm_II.Day18.problem343;
 
 public class Solution {
     public int integerBreak(int n) {
-        int maxValue = 0;
         int[] dp = new int[n + 1];
         dp[0] = 0; dp[1] = 1;
 
