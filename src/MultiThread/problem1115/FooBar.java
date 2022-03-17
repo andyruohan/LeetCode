@@ -3,7 +3,7 @@ package MultiThread.problem1115;
 import java.util.concurrent.Semaphore;
 
 class FooBar {
-    private volatile int n;
+    private int n;
     Semaphore foo = new Semaphore(1);
     Semaphore bar = new Semaphore(0);
 
@@ -31,5 +31,9 @@ class FooBar {
             printBar.run();
             foo.release();
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
