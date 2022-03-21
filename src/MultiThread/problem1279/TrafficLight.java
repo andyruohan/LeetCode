@@ -5,7 +5,6 @@ import java.util.concurrent.Semaphore;
 public class TrafficLight {
     private Semaphore greenLight = new Semaphore(1, true);
     private boolean road1CanGo = true;
-    private boolean road2CanGo = false;
 
     public TrafficLight() {
 
@@ -19,19 +18,11 @@ public class TrafficLight {
             Runnable crossCar    // Use crossCar.run() to make car cross the intersection
     ) throws InterruptedException {
         greenLight.acquire();
-        if (roadId == 1 && road1CanGo || roadId == 2 && road2CanGo) {
-            crossCar.run();
-        } else if (roadId == 1) {
+        if (roadId == 1 && !road1CanGo || roadId == 2 && road1CanGo) {
             turnGreen.run();
-            road1CanGo = true;
-            road2CanGo = false;
-            crossCar.run();
-        } else if (roadId == 2) {
-            turnGreen.run();
-            road1CanGo = false;
-            road2CanGo = true;
-            crossCar.run();
+            road1CanGo = !road1CanGo;
         }
+        crossCar.run();
         greenLight.release();
     }
 }
