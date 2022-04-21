@@ -1,5 +1,6 @@
 package Algorithm_III.Day5.problem159;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,12 +17,7 @@ public class Solution {
                 if (alphabetMap.size() < 2) {
                     alphabetMap.put(currentChar, right);
                 } else if (alphabetMap.size() == 2) {
-                    int min = Integer.MAX_VALUE;
-                    for (Integer value: alphabetMap.values()) {
-                        if (min > value) {
-                            min = value;
-                        }
-                    }
+                    int min = Collections.min(alphabetMap.values());
                     left = min + 1;
                     alphabetMap.remove(s.charAt(min));
                     alphabetMap.put(currentChar, right);
