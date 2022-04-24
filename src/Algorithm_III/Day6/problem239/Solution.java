@@ -1,44 +1,32 @@
 package Algorithm_III.Day6.problem239;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Solution {
     private int length;
     public int[] maxSlidingWindow(int[] nums, int k) {
         length = nums.length;
-        int left = 0, right = k - 1, maxIndex = findMaxIndex(nums, left, right);
-        Map<Character, Integer> alphabetMap = new HashMap();
-        List<Integer> result = new ArrayList<>();
-        while (right < length) {
-            if (left <= maxIndex && maxIndex <= right) {
-                if (nums[right] > nums[maxIndex]) {
-                    maxIndex = right;
-                }
-                result.add(nums[maxIndex]);
-            } else {
-                maxIndex = findMaxIndex(nums, left, right);
-                result.add(nums[maxIndex]);
+        Deque<Integer> deque = new LinkedList<Integer>();
+        for (int i = 0; i < k; i++) {
+            while (!deque.isEmpty() && nums[i] >= nums[deque.peekLast()]) {
+                deque.pollLast();
             }
-            left++;
-            right++;
+            deque.offerLast(i);
         }
-        return result.stream().mapToInt(Integer::valueOf).toArray();
-    }
 
-    private int findMaxIndex(int[] height, int left, int right) {
-        int max = -10001, maxIndex = 0;
-        for (int i = left; i <= right; i++) {
-            if (max < height[i]) {
-                max = height[i];
-                maxIndex = i;
-            } else if (max == height[i]) {
-                maxIndex = i;
+        int[] ans = new int[length - k + 1];
+        ans[0] = nums[deque.peekFirst()];
+        for (int i = k; i < length; i++) {
+            while (!deque.isEmpty() && nums[i] >= nums[deque.peekLast()]) {
+                deque.pollLast();
             }
+            deque.offerLast(i);
+            while (deque.peekFirst() <= i - k) {
+                deque.pollFirst();
+            }
+            ans[i - k + 1] = nums[deque.peekFirst()];
         }
-        return maxIndex;
+        return ans;
     }
 
     public static void main(String[] args) {
