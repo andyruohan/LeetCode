@@ -1,19 +1,17 @@
 package Algorithm_III.Day6.problem1004;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
 public class Solution {
     public int longestOnes(int[] nums, int k) {
-        int length = nums.length, left = 0, right = 0, ans = 0;
-        Deque<Integer> deque = new LinkedList<>();
-        while (right < length) {
+        int left = 0, right = 0, zeroNum = 0, ans = 0;
+        while (right < nums.length) {
             if (nums[right] == 0) {
-                deque.addLast(right);
+                zeroNum++;
             }
-            if (deque.size() > k) {
-                left = deque.getFirst() + 1;
-                deque.removeFirst();
+            while (zeroNum > k) {
+                if (nums[left] == 0) {
+                    zeroNum--;
+                }
+                left++;
             }
             ans = Math.max(ans, right - left + 1);
             right++;
