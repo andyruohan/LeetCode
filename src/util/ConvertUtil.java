@@ -15,5 +15,6 @@ public class ConvertUtil {
         System.out.println(ConvertUtil.squareBracketsToBrace("\n" +
                 "[[5,2],[3,5],[5,4],[2,5],[3,4],[4,5],[1,2],[2,1],[3,1],[5,5]]\n" +
                 "[[2,5],[1,1],[2,1],[1,3],[5,2],[3,4],[2,5],[5,5],[4,2],[2,1],[1,4],[3,1]]"));
+        System.out.println(ConvertUtil.squareBracketsToBrace("[[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]"));
     }
 }
