@@ -6,66 +6,44 @@ import java.util.List;
 public class Solution {
     private int rows;
     private int cols;
-    private boolean[][] flowToPacificArray;
-    private boolean[][] flowToAtlanticArray;
+    boolean[][] flowToPacificArray;
+    boolean[][] flowToAtlanticArray;
+    List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> pacificAtlantic(int[][] heights) {
         rows = heights.length;
         cols = heights[0].length;
         flowToPacificArray = new boolean[rows][cols];
         flowToAtlanticArray = new boolean[rows][cols];
         for (int i = 0; i < rows; i++) {
-            dfsOfPacificOcean(heights, i, 0);
-            dfsOfAtlanticOcean(heights, i, cols - 1);
+            dfs(heights, flowToPacificArray, i, 0);
+            dfs(heights, flowToAtlanticArray, i, cols - 1);
         }
         for (int j = 0; j < cols; j++) {
-            dfsOfPacificOcean(heights, 0, j);
-            dfsOfAtlanticOcean(heights,rows - 1, j);
+            dfs(heights, flowToPacificArray, 0, j);
+            dfs(heights,flowToAtlanticArray, rows - 1, j);
         }
 
-        List<List<Integer>> res = new ArrayList<>();
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (flowToPacificArray[i][j] && flowToAtlanticArray[i][j]) {
-                    res.add(Arrays.asList(i, j));
-                }
-            }
-        }
         return res;
     }
 
-    private void dfsOfPacificOcean(int[][] heights, int x, int y) {
-        if (flowToPacificArray[x][y]) return;
-        flowToPacificArray[x][y] = true;
+    private void dfs(int[][] heights, boolean[][] flowToOceanArray, int x, int y) {
+        if (flowToOceanArray[x][y]) return;
+        flowToOceanArray[x][y] = true;
+        if (flowToPacificArray[x][y] && flowToAtlanticArray[x][y]) {
+            res.add(Arrays.asList(x, y));
+        }
 
         if (x - 1 >= 0 && heights[x][y] <= heights[x - 1][y]) {
-            dfsOfPacificOcean(heights, x - 1, y);
+            dfs(heights, flowToOceanArray, x - 1, y);
         }
         if (x + 1 < rows && heights[x][y] <= heights[x + 1][y]) {
-            dfsOfPacificOcean(heights, x + 1, y);
+            dfs(heights, flowToOceanArray, x + 1, y);
         }
         if (y - 1 >= 0 && heights[x][y] <= heights[x][y - 1]) {
-            dfsOfPacificOcean(heights, x, y - 1);
+            dfs(heights, flowToOceanArray, x, y - 1);
         }
         if (y + 1 < cols && heights[x][y] <= heights[x][y + 1]) {
-            dfsOfPacificOcean(heights, x, y + 1);
-        }
-    }
-
-    private void dfsOfAtlanticOcean(int[][] heights, int x, int y) {
-        if (flowToAtlanticArray[x][y]) return;
-        flowToAtlanticArray[x][y] = true;
-
-        if (x - 1 >= 0 && heights[x][y] <= heights[x - 1][y]) {
-            dfsOfAtlanticOcean(heights, x - 1, y);
-        }
-        if (x + 1 < rows && heights[x][y] <= heights[x + 1][y]) {
-            dfsOfAtlanticOcean(heights, x + 1, y);
-        }
-        if (y - 1 >= 0 && heights[x][y] <= heights[x][y - 1]) {
-            dfsOfAtlanticOcean(heights, x, y - 1);
-        }
-        if (y + 1 < cols && heights[x][y] <= heights[x][y + 1]) {
-            dfsOfAtlanticOcean(heights, x, y + 1);
+            dfs(heights, flowToOceanArray, x, y + 1);
         }
     }
 
