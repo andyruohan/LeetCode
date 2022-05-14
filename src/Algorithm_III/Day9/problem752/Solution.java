@@ -5,19 +5,18 @@ import java.util.*;
 public class Solution {
     HashSet<String> deadSet = new HashSet<>();
     public int openLock(String[] deadends, String target) {
-        if (Arrays.asList(deadends).contains("0000")) {
-            return -1;
-        } else if ("0000".equals(target)) {
+        if ("0000".equals(target)) {
             return 0;
         }
 
-        for (String deadend: deadends) {
-            deadSet.add(deadend);
+        Collections.addAll(deadSet, deadends);
+        if (deadSet.contains("0000")) {
+            return -1;
         }
 
-        Queue<String> queue = new ArrayDeque();
+        Queue<String> queue = new LinkedList();
         queue.add("0000");
-        List<String> hasVisited = new ArrayList<>();
+        HashSet<String> hasVisited = new HashSet<>();
         hasVisited.add("0000");
 
         int step = 0;
@@ -42,13 +41,14 @@ public class Solution {
 
     private List<String> getNextStatusNums(String str) {
         List<String> statusNums = new ArrayList<>();
+        char[] unVisitedArray = str.toCharArray();
         for (int i = 0; i < 4; i++) {
-            char[] unVisitedArray = str.toCharArray();
             char temp = unVisitedArray[i];
             unVisitedArray[i] = getPreNum(temp);
             statusNums.add(new String(unVisitedArray));
             unVisitedArray[i] = getNextNum(temp);
             statusNums.add(new String(unVisitedArray));
+            unVisitedArray[i] = temp;
         }
         return statusNums;
     }
@@ -64,6 +64,7 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
 //        System.out.println(solution.openLock(new String[] {"0201","0101","0102","1212","2002"}, "0202"));
-        System.out.println(solution.openLock(new String[] {"0000"}, "8888"));
+//        System.out.println(solution.openLock(new String[] {"0000"}, "8888"));
+        System.out.println(solution.openLock(new String[] {"5557","5553","5575","5535","5755","5355","7555","3555","6655","6455","4655","4455","5665","5445","5645","5465","5566","5544","5564","5546","6565","4545","6545","4565","5656","5454","5654","5456","6556","4554","4556","6554"}, "5555"));
     }
 }
