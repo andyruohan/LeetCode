@@ -1,5 +1,6 @@
 package Algorithm_III.Day10.problem1368;
 
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -10,6 +11,7 @@ public class Solution {
         int[][] directions = new int[][] {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
         int[] distance = new int[m * n];
+        Arrays.fill(distance, Integer.MAX_VALUE);
         boolean[] hasVisited = new boolean[m * n];
 
         distance[0] = 0;
@@ -31,9 +33,7 @@ public class Solution {
                 int newIndex = x0 * n + y0;
                 int newDistance = distance[index] + (grid[x][y] == i + 1 ? 0: 1);
 
-                if (x0 < 0 || x0 >= m || y0 < 0 || y0 >= n) {
-                    continue;
-                } else {
+                if (x0 >= 0 && x0 < m && y0 >= 0 && y0 < n && newDistance < distance[newIndex]) {
                     distance[newIndex] = newDistance;
                     if (grid[x][y] == i + 1) {
                         queue.addFirst(newIndex);
@@ -49,6 +49,6 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         System.out.println(solution.minCost(new int[][]{{1, 1, 1, 1}, {2, 2, 2, 2}, {1, 1, 1, 1}, {2, 2, 2, 2}}));
-//        System.out.println(solution.minCost(new int[][]{{1, 1, 3}, {3, 2, 2}, {1, 1, 4}}));
+        System.out.println(solution.minCost(new int[][]{{1, 1, 3}, {3, 2, 2}, {1, 1, 4}}));
     }
 }
