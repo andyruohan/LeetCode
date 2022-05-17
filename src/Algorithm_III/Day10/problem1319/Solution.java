@@ -1,4 +1,4 @@
-package Algorithm_III.Day10;
+package Algorithm_III.Day10.problem1319;
 
 import java.util.ArrayList;
 import java.util.List;
