@@ -36,7 +36,6 @@ public class Solution {
                 }
             }
         }
-        System.out.println(rooms);
     }
 
     public static void main(String[] args) {
