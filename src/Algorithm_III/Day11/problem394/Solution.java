@@ -1,4 +1,4 @@
-package Algorithm_III.problem11.problem394;
+package Algorithm_III.Day11.problem394;
 
 import java.util.Stack;
 
