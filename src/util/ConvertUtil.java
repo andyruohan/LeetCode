@@ -7,6 +7,10 @@ public class ConvertUtil {
         return stringWithSquareBrackets;
     }
 
+    public static String doubleQuotationToSingleQuotation(String stringWithDoubleQuotation) {
+        return stringWithDoubleQuotation.replace("\"", "\'");
+    }
+
     public static void main(String[] args) {
         System.out.println(ConvertUtil.squareBracketsToBrace("\n" +
                 "[[216397070,363167701],[98730764,158208909],[441003187,466254040],[558239978,678368334],[683942980,717766451]]\n" +
@@ -19,5 +23,6 @@ public class ConvertUtil {
         System.out.println(ConvertUtil.squareBracketsToBrace("[[2147483647,-1,0,2147483647],[2147483647,2147483647,2147483647,-1],[2147483647,-1,2147483647,-1],[0,-1,2147483647,2147483647]]"));
         System.out.println(ConvertUtil.squareBracketsToBrace("[[1,1,1,1],[2,2,2,2],[1,1,1,1],[2,2,2,2]]"));
         System.out.println(ConvertUtil.squareBracketsToBrace("[[0,1],[1,2],[2,0],[1,3]]"));
+        System.out.println(ConvertUtil.doubleQuotationToSingleQuotation("{{\"5\",\"3\",\".\",\".\",\"7\",\".\",\".\",\".\",\".\"},{\"6\",\".\",\".\",\"1\",\"9\",\"5\",\".\",\".\",\".\"},{\".\",\"9\",\"8\",\".\",\".\",\".\",\".\",\"6\",\".\"},{\"8\",\".\",\".\",\".\",\"6\",\".\",\".\",\".\",\"3\"},{\"4\",\".\",\".\",\"8\",\".\",\"3\",\".\",\".\",\"1\"},{\"7\",\".\",\".\",\".\",\"2\",\".\",\".\",\".\",\"6\"},{\".\",\"6\",\".\",\".\",\".\",\".\",\"2\",\"8\",\".\"},{\".\",\".\",\".\",\"4\",\"1\",\"9\",\".\",\".\",\"5\"},{\".\",\".\",\".\",\".\",\"8\",\".\",\".\",\"7\",\"9\"}}"));
     }
 }
