@@ -6,7 +6,6 @@ import java.util.List;
 public class Solution {
     private int[] index;
     private int[] temp;
-    private int[] tempIndex;
     private int[] ans;
     private int length;
 
@@ -14,7 +13,6 @@ public class Solution {
         length = nums.length;
         index = new int[length];
         temp = new int[length];
-        tempIndex = new int[length];
         ans = new int[length];
         for (int i = 0; i < length; i++) {
             index[i] = i;
@@ -40,42 +38,33 @@ public class Solution {
     }
 
     public void merge(int[] nums, int left, int mid, int right) {
-        int i = left, j = mid + 1, p = left;
-        while (i <= mid && j <= right) {
-            if (nums[i] <= nums[j]) {
-                temp[p] = nums[i];
-                tempIndex[p] = index[i];
-                ans[index[i]] += (j - mid - 1);
-                ++i;
-                ++p;
-            } else {
-                temp[p] = nums[j];
-                tempIndex[p] = index[j];
-                ++j;
-                ++p;
-            }
+        for (int i = left; i <= right; i++) {
+            temp[i] = index[i];
         }
-        while (i <= mid) {
-            temp[p] = nums[i];
-            tempIndex[p] = index[i];
-            ans[index[i]] += (j - mid -1);
-            ++i;
-            ++p;
-        }
-        while (j <= right) {
-            temp[p] = nums[j];
-            tempIndex[p] = index[j];
-            ++j;
-            ++p;
-        }
+        
+        int i = left, j = mid + 1;
         for (int k = left; k <= right; k++) {
-            index[k] = tempIndex[k];
-            nums[k] = temp[k];
+            if (i == mid + 1) {
+                index[k] = temp[j];
+                j++;
+            } else if (j == right + 1) {
+                index[k] = temp[i];
+                i++;
+                ans[index[k]] += right - mid;
+            } else if (nums[temp[i]] <= nums[temp[j]]) {
+                index[k] = temp[i];
+                i++;
+                ans[index[k]] += j - mid - 1;
+            } else {
+                index[k] = temp[j];
+                j++;
+            }
         }
     }
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.countSmaller(new int[] {5,2,6,1}));
+//        System.out.println(solution.countSmaller(new int[] {5,2,6,1}));
+        System.out.println(solution.countSmaller(new int[] {-1, -1}));
     }
 }
