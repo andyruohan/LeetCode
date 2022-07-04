@@ -11,12 +11,20 @@ public class Solution {
         }
 
         int[][] f = new int[length][3];
-        f[0][0] = -prices[0];
+        int f10 = -prices[0], f11 = 0, f12 = 0, f00, f01, f02;
         for (int i = 1; i < length; ++i) {
-            f[i][0] = Math.max(f[i - 1][0], f[i - 1][2] - prices[i]);
-            f[i][1] = f[i - 1][0] + prices[i];
-            f[i][2] = Math.max(f[i - 1][1], f[i - 1][2]);
+            f00 = Math.max(f10, f12 - prices[i]); //fjk means f[i - j][k]
+            f01 = f10 + prices[i];
+            f02 = Math.max(f11, f12);
+            f10 = f00;
+            f11 = f01;
+            f12 = f02;
         }
-        return Math.max(f[length - 1][1], f[length - 1][2]);
+        return Math.max(f11, f12);
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.maxProfit(new int[]{1, 4, 2}));
     }
 }
