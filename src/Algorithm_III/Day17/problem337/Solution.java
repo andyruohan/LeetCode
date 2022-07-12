@@ -5,35 +5,20 @@ import java.util.Queue;
 
 public class Solution {
     public int rob(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
+        int[] robStatus = dfs(root);
+        return Math.max(robStatus[0], robStatus[1]);
+    }
 
-        int depth = 0;
-        int[] dp = new int[14];
-        dp[1] = root.val;
-        while (!queue.isEmpty()) {
-            depth++;
-            int count = 0;
-            int n = queue.size();
-            for (int i = 0; i < n; i++) {
-                TreeNode curNode = queue.poll();
-                count += curNode.val;
-                if (curNode.left != null) {
-                    queue.add(curNode.left);
-                }
-                if (curNode.right != null) {
-                    queue.add(curNode.right);
-                }
-            }
-            if (depth > 1) {
-                dp[depth] = Math.max(dp[depth - 2] + count, dp[depth - 1]);
-            }
+    public int[] dfs(TreeNode treeNode) {
+        if (null == treeNode) {
+            return new int[] {0, 0};
         }
 
-        return dp[depth];
+        int[] left = dfs(treeNode.left);
+        int[] right = dfs(treeNode.right);
+        int selected = treeNode.val + left[1] + right[1];
+        int unselected = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        return new int[] {selected, unselected};
     }
 
     public static void main(String[] args) {
