@@ -10,25 +10,25 @@ public class Solution {
         sum = Arrays.stream(nums).sum();
         Arrays.sort(nums);
         if (preCheck(nums, sum)) {
-            return dfs(nums, 0, sum);
+            return dfs(nums, 0, 0);
         } else {
             return false;
         }
     }
 
-    public boolean dfs(int[] nums, int i, int target) {
-        String key = target + "_" + i;
-        if (target == sum / 2) {
-            return true;
-        }
+    public boolean dfs(int[] nums, int i, int curSum) {
+        String key = curSum + "_" + i;
         if (visitedMap.containsKey(key)) {
             return visitedMap.get(key);
         }
-        if (i >= length) {
+        if (2 * curSum == sum) {
+            return true;
+        } else if (2 * curSum > sum || i >= length) {
             return false;
+        } else {
+            visitedMap.put(key, dfs(nums, i + 1, curSum + nums[i]) || dfs(nums, i + 1, curSum));
+            return visitedMap.get(key);
         }
-        visitedMap.put(key, dfs(nums, i + 1, target - nums[i]) || dfs(nums, i + 1, target));
-        return visitedMap.get(key);
     }
 
     public boolean preCheck(int[] nums, int sum) {
