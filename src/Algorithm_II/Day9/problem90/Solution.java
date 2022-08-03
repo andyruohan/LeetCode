@@ -10,7 +10,7 @@ public class Solution {
         Arrays.sort(nums);
         length = nums.length;
         List<List<Integer>> result = new ArrayList<>();
-        result.add(new ArrayList<>() {});
+//        result.add(new ArrayList<>() {});
         dfs(nums, result, 0);
         return result;
     }

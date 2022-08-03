@@ -27,18 +27,18 @@ public class Solution {
         if (num > 0) {
             if (num / 1000 > 0) {
                 if (num / 1000 < 4) {
-                    sb.append("M".repeat(num / 1000));
+//                    sb.append("M".repeat(num / 1000));
                 }
                 num = num % 1000;
             }
             if (num / 100 > 0) {
                 if (num / 100 < 4) {
-                    sb.append("C".repeat(num / 100));
+//                    sb.append("C".repeat(num / 100));
                 } else if (num / 100 == 4) {
                     sb.append("CD");
                 } else if (num / 100 < 9) {
                     sb.append("D");
-                    sb.append("C".repeat(num / 100 - 5));
+//                    sb.append("C".repeat(num / 100 - 5));
                 } else if (num / 100 == 9) {
                     sb.append("CM");
                 }
@@ -46,12 +46,12 @@ public class Solution {
             }
             if (num / 10 > 0) {
                 if (num / 10 < 4) {
-                    sb.append("X".repeat(num / 10));
+//                    sb.append("X".repeat(num / 10));
                 } else if (num / 10 == 4) {
                     sb.append("XL");
                 } else if (num / 10 < 9) {
                     sb.append("L");
-                    sb.append("X".repeat(num / 10 - 5));
+//                    sb.append("X".repeat(num / 10 - 5));
                 } else if (num / 10 == 9) {
                     sb.append("XC");
                 }
@@ -59,12 +59,12 @@ public class Solution {
             }
             if (num > 0) {
                 if (num < 4) {
-                    sb.append("I".repeat(num));
+//                    sb.append("I".repeat(num));
                 } else if (num == 4) {
                     sb.append("IV");
                 } else if (num  < 9) {
                     sb.append("V");
-                    sb.append("I".repeat(num  - 5));
+//                    sb.append("I".repeat(num  - 5));
                 } else if (num == 9) {
                     sb.append("IX");
                 }
