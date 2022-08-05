@@ -9,12 +9,17 @@ public class Solution {
         if (preCheck(nums, sum)) {
             int m = nums.length, n = sum / 2;
             dp = new boolean[m][n + 1];
+            for (int i = 0; i < m; i++) {
+                dp[i][0] = true;
+            }
             dp[0][nums[0]] = true;
             for (int i = 1; i < m; i++) {
+                int num = nums[i];
                 for (int j = 1; j <= n; j++) {
-                    dp[i][j] = dp[i - 1][j] || nums[i] == j;
-                    if (j > nums[i]) {
-                        dp[i][j] = dp[i][j] || dp[i - 1][j - nums[i]];
+                    if (j >= num) {
+                        dp[i][j] = dp[i - 1][j] || dp[i - 1][j - num];
+                    } else {
+                        dp[i][j] = dp[i - 1][j];
                     }
                 }
             }
