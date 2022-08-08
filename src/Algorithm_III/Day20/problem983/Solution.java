@@ -1,4 +1,4 @@
-package Algorithm_III.Day21.problem983;
+package Algorithm_III.Day20.problem983;
 
 import java.util.HashSet;
 
