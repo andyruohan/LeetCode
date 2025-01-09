@@ -11,9 +11,7 @@ public class Solution {
             if (nums[slowI] != nums[i]) {
                 slowI++;
                 if (slowI != i) {
-                    int temp = nums[i];
-                    nums[i] = nums[slowI];
-                    nums[slowI] = temp;
+                    nums[slowI] = nums[i];
                 }
             }
         }
